@@ -3,23 +3,24 @@ import { config } from "dotenv";
 
 config();
 
-const stripe = new Stripe(process.env.StripeAPI);
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
-// stripe.paymentLinks.create({
-//   lineItems: [
-//     {
-//       price: "price_1OmBr9SEFUwbQhR8TrJEphOa",
-//       quantity: 1,
-//     },
-//   ],
-//   afterCompletion: {
-//     type: "redirect",
-//     redirect: {
-//       url: "https://example.com",
-//     },
-//   },
-// });
+const link = await stripe.paymentLinks.create({
+  line_items: [
+    {
+      price: "price_1OmBr9SEFUwbQhR8TrJEphOa",
+      quantity: 1,
+    },
+  ],
+  after_completion: {
+    type: "redirect",
+    redirect: {
+      url: "https://example.com",
+    },
+  },
+});
 
+console.log(link.url);
 // const paymentIntent = await stripe.paymentIntents.create({
 //   amount: 2000,
 //   currency: "usd",

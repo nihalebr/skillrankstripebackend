@@ -4,7 +4,7 @@ import { config } from "dotenv";
 
 config();
 
-const stripe = new Stripe(process.env.StripeAPI);
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 const client = new MongoClient(process.env.MONGODB_URI);
 
 export const handler = async (event, context) => {
